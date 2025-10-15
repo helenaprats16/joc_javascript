@@ -1,0 +1,57 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+body{
+  background-color: #E3F2FD ;
+}
+
+.tauler{
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 100px); /* 4 columnes fixes */
+  gap: 40px; /* espai entre cartes */
+  align-items: center;
+  justify-content: center;
+}
+
+
+.carta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  background-color: #f9f0a1;
+  border-radius: 10px;
+  border:1px solid #e9d204;
+  transition: 0.25s;
+}
+
+
+.carta:hover{
+  background-color: #f7e85d;
+}
+
+.boto {
+  grid-column: span 4; /* ocupa tota l'amplària del tauler */
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 20px;
+  background-color: #f9f0a1;
+  border: 1px solid #e9d204;
+  border-radius: 10px;
+}
+
+.boto:hover {
+  background-color: #f7e85d;
+}
+
+
+footer{
+  margin-top: 40%;
+}
