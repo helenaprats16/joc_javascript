@@ -1,44 +1,68 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: monospace;
 }
 
-body{
-  background-color: #E3F2FD ;
+body {
+  background-color: #E3F2FD;
 }
 
-.tauler{
+.tauler {
   padding: 15px;
   display: grid;
   grid-template-columns: repeat(4, 100px); /* 4 columnes fixes */
-  gap: 40px; /* espai entre cartes */
+  gap: 60px; /*espai entre carta i carta*/
   align-items: center;
   justify-content: center;
+  perspective: 1000px; /* afegit per al context 3D */
+
 }
 
+.carta {
+  position: relative;
+  width: 150px;
+  height: 100px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
 
-.carta{
+.carta.girar {
+  transform: rotateY(180deg);
+}
+.tauler.blocked .carta {
+  pointer-events: none; /* els clics no arriben a les cartes mentres se estan mostrant al inici de partida*/
+}
+.front,
+.back {
+  position: absolute; /*  molt important */
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 45px;
   background-color: #f9f0a1;
   border-radius: 10px;
-  border:1px solid #e9d204;
+  border: 1px solid #e9d204;
   transition: 0.25s;
 }
 
+.back {
+  transform: rotateY(180deg);
+}
 
-.carta:hover{
+.front:hover {
   background-color: #f7e85d;
 }
 
 .boto {
-  grid-column: span 4; /* ocupa tota l'amplària del tauler */
+  grid-column: span 5;
   padding: 10px 20px;
   margin-top: 10px;
   font-size: 20px;
@@ -51,7 +75,21 @@ body{
   background-color: #f7e85d;
 }
 
+.contador{
 
-footer{
+  position: fixed; /* o absolute si vols respecte un contenidor */
+  top: 20px;
+  right: 20px;
+  background-color: #f9f0a1;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  border: 1px solid #e9d204;
+  z-index: 100; /* perquè estiga per damunt del tauler */
+
+
+}
+footer {
   margin-top: 40%;
 }

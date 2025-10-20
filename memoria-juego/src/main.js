@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   header.innerHTML = menuJoc();
   footer.innerHTML = peuPagina();
 
+  
   router(window.location.hash ,appDiv);
   window.addEventListener("hashchange", () => {
     router(window.location.hash, appDiv);

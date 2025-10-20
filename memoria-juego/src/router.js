@@ -11,10 +11,22 @@ const routes = new Map([
 
 ])
 
-function router(route,container) {
-    if (routes.has(route)) {
-        container.innerHTML = routes.get(route)();
-    }else{
-        container.innerHTML = `<h2>404</h2>`
-    }
+function mountResult(container, result) {
+  if (result instanceof HTMLElement) {
+    container.innerHTML = '';
+    container.appendChild(result);
+  } else {
+    container.innerHTML = String(result);
+  }
+}
+
+function router(route, container) {
+  if (!container) return;
+  const handler = routes.get(route);
+  if (handler) {
+    const result = handler();
+    mountResult(container, result);
+  } else {
+    container.innerHTML = '<h2>404</h2>';
+  }
 }
