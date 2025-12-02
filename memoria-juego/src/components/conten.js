@@ -1,9 +1,12 @@
 export { renderContent };
 
-function renderContent() {
-  const numCartes = 20;
-
-  const arrayEmojis = [
+// Constants del joc en valencià
+const TOTAL_CARTES = 20;
+const TEMPS_MOSTRAR_INICIAL = 200;     
+const TEMPS_OCULTAR_INICIAL = 5000;    
+const TEMPS_ERROR_PARELLA = 1000;      
+const TEMPS_VICTORIA = 1000;
+const arrayEmojis = [
     "🍉",
     "🥝",
     "🍪",
@@ -24,17 +27,30 @@ function renderContent() {
     "🫐",
     "🥗",
     "🥗",
-  ]; //cartes
+  ]; //cartes           
+  
 
+function renderContent() {  
+  const tauler = crearTaulerJoc();
+  afegirLogicaJoc(tauler);
+  mostrarCartesInicials(tauler);
+  return tauler;
+
+
+}
+
+function crearTaulerJoc(){
+//array aleatori dels emojis
   let emojis_aleatoris = arrayEmojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
 
-  //creem contenidor principal del joc
+
+//creem contenidor principal del joc
   const tauler = document.createElement("div");
   tauler.classList.add("tauler");
   tauler.classList.add("blocked"); // impedir clics fins que acabe el timeout
 
   //Creem les cartes
-  for (let i = 0; i < numCartes; i++) {
+  for (let i = 0; i < TOTAL_CARTES; i++) {
     const carta = document.createElement("div");
     carta.className = "carta";
 
@@ -48,18 +64,12 @@ function renderContent() {
 
     carta.appendChild(caraFront);
     carta.appendChild(caraBack);
-
-    //Quan es fatja clic a la carta que es gire
-    // carta.addEventListener("click", () => {
-    //   carta.classList.toggle("girar");
-    // });
-
     tauler.appendChild(carta); /*Anyadir la carta ara al tauler, despres de haber creat el event */
 
     console.log(carta);
   }
 
-  //creem BOTO REINICIAR PARTIDA com a element real
+  //creem BOTO REINICIAR PARTIDA 
 
   const boto = document.createElement("button");
   boto.className = "boto";
@@ -68,14 +78,10 @@ function renderContent() {
 
   tauler.appendChild(boto);
 
-  //MOSTRAR CARTES INICI PARTIDA
-  mostrarCartesInicials(tauler);
-
-  //logica del joc
-  afegirLogicaJoc(tauler);
-
   return tauler;
+
 }
+
 
 function mostrarCartesInicials(tauler) {
   //Despres de 200 ms afegim la classe .girar a totes les cartes que estan dins del div taules (les mostrem)
@@ -83,7 +89,7 @@ function mostrarCartesInicials(tauler) {
     tauler
       .querySelectorAll(".carta")
       .forEach((carta) => carta.classList.add("girar"));
-  }, 200);
+  }, TEMPS_MOSTRAR_INICIAL);
 
   //despres de 5 segons llevem la classe .girar (les tornem a tancar)
 
@@ -92,29 +98,34 @@ function mostrarCartesInicials(tauler) {
       .querySelectorAll(".carta")
       .forEach((carta) => carta.classList.remove("girar"));
     tauler.classList.remove("blocked"); //torna a permitir fer clics
-  }, 5000);
+  }, TEMPS_OCULTAR_INICIAL);
 }
 
 
-
+/***********************************************************************/
 /*LOGICA DEL JOC */
 /*- Primer clic guardar carta1
   - Segon clic guardar carta2 i comparar
     - Si son iguals es deixen girades
     - si no son iguals es tornen a tancar les dos cartes pasades 1 segon
-    - controlar click extr mentres se procesen les dos cartes a */
+    - controlar clicks externs mentres se procesen les dos cartes  */
 
 function afegirLogicaJoc(tauler) {
 
-  let divParellesEncontrades = document.createElement("div");
-  divParellesEncontrades.textContent ="Parelles encertades: 0";
-  divParellesEncontrades.className = "contador";
-  tauler.appendChild(divParellesEncontrades);
-  let contador=0;
+  //1º Crear el marcador
+  const marcador = crearMarcador();
+  tauler.appendChild(marcador);
+
+
+  //2º Inicialitzar el estat del joc
   let carta1 = null;
   let carta2 = null;
   let bloquejat = false;
+  let contador=0;
+  const totalParelles = 10;
 
+  //3º Funcio per gestionar cada clic de cart
+ 
   tauler.addEventListener("click", (e) => {
     
     if (tauler.classList.contains("blocked") || bloquejat) return;
@@ -150,14 +161,14 @@ function afegirLogicaJoc(tauler) {
       bloquejat = false;
 
       contador++;
-      divParellesEncontrades.textContent=" Parelles encertades: "+contador;
+      marcador.textContent=" Parelles encertades: "+contador;
 
   
-      if (contador === 10) {
+      if (contador === totalParelles) {
         setTimeout(() => {
                 alert("Enhorabona, has guanyat!");
 
-        }, 200);
+        }, TEMPS_VICTORIA);
       }
     } else {
       // No són iguals: les tanquem després d'un segon
@@ -167,9 +178,16 @@ function afegirLogicaJoc(tauler) {
         carta1 = null;
         carta2 = null;
         bloquejat = false;
-      }, 1000);
+      }, TEMPS_ERROR_PARELLA);
     }
   });
 
    
+}
+
+function crearMarcador(){
+  let divParellesEncontrades = document.createElement("div");
+  divParellesEncontrades.textContent ="Parelles encertades: 0";
+  divParellesEncontrades.className = "contador";
+  return divParellesEncontrades;
 }
