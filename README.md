@@ -39,6 +39,17 @@ npm run build    # Si el vols per producció
 - LocalStorage (per guardar les dades)
 - Bootstrap 5 (per tindrer millor aspecte)
 
+## Paleta de colors:
+Fons         → Blau clanet (#E3F2FD)
+Cartes       → Groc pastel (#f9f0a1)
+Botons       → Groc pastel (#f9f0a1)
+Accents      → Groc intens (#f7e85d) al hover
+Bordes       → Groc fosc (#e9d204)
+Login/Reg    → Negre fosc (#212529)
+Admin        → Roig (#dc3545)
+Usuari       → Cian (#0dcaf0)
+
+
 
 ## Com està organitzat?
 
