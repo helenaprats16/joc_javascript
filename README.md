@@ -1,67 +1,83 @@
-# joc_javascript
+# Joc de Memòria en JavaScript
 
+Projecte d'un **joc de memòria de trobar parelles** desenvolupat amb JavaScript, amb sistema d'usuaris, puntuacions i perfil personal. Les dades es guarden automàticament en finalitzar cada partida.
 
-## Que fa exactament?
+---
 
-- Joc de memòria on trobes parelles de cartes
-- Sistema d'usuaris (registre i login)
-- Cada usuari té el seu perfil amb les seves estadístiques
-- Les puntuacions es guarden soles quan acabes de jugar
+## Funcionalitats principals
 
+* Joc de memòria per trobar **10 parelles de cartes**
+* **Sistema d'usuaris** amb registre i inici de sessió
+* Perfil d'usuari amb **estadístiques personals**
+* Guardat automàtic de **puntuacions**
+* Interfície moderna i responsive
 
+---
 
+## Posar en marxa el projecte
 
-## Per a arrancar el projecte
+```bash
+npm install      # Instal·la les dependències
+npm run dev      # Arranca el projecte en mode desenvolupament
+npm test         # Executa els tests
+npm run build    # Compila el projecte per a producció
+```
 
-
-npm install      # Descarrega les coses que li fan falta
-npm run dev      # Ho poses a funcionar
-npm test         # Executar els tests
-npm run build    # Si el vols per producció
-
-
-
+---
 
 ## Com es juga?
 
-1. Te registres
-2. Fas login
-3. Cliques el botó de "Joc"
-4. Trobes les 10 parelles
-5. Veus la puntuacio que fas al final de la partida
+1. Registrar-se com a usuari
+2. Iniciar sessió
+3. Clicar el botó **"Joc"**
+4. Trobar les **10 parelles de cartes**
+5. Consultar la **puntuació final** de la partida
 
+---
 
-## Que he utilitzat?
+## Tecnologies utilitzades
 
-- JavaScript
-- Web Components (components personalitzats)
-- Vitest (tests per comprovar que funciona)
-- LocalStorage (per guardar les dades)
-- Bootstrap 5 (per tindrer millor aspecte)
+* **JavaScript**
+* **Web Components** (components personalitzats)
+* **Vitest** (tests unitaris)
+* **LocalStorage** (persistència de dades)
+* **Bootstrap 5** (disseny i estil)
 
-## Paleta de colors:
-Fons         → Blau clanet (#E3F2FD)
-Cartes       → Groc pastel (#f9f0a1)
-Botons       → Groc pastel (#f9f0a1)
-Accents      → Groc intens (#f7e85d) al hover
-Bordes       → Groc fosc (#e9d204)
-Login/Reg    → Negre fosc (#212529)
-Admin        → Roig (#dc3545)
-Usuari       → Cian (#0dcaf0)
+---
 
+## Paleta de colors
 
+| Element          | Color                 |
+| ---------------- | --------------------- |
+| Fons             | Blau clar `#E3F2FD`   |
+| Cartes           | Groc pastel `#f9f0a1` |
+| Botons           | Groc pastel `#f9f0a1` |
+| Hover / Accents  | Groc intens `#f7e85d` |
+| Bordes           | Groc fosc `#e9d204`   |
+| Login / Registre | Negre fosc `#212529`  |
+| Usuari           | Cian `#0dcaf0`        |
+| Administrador    | Roig `#dc3545`        |
 
-## Com està organitzat?
+---
 
+## Estructura del projecte
+
+```text
 src/
-├── components/       # Els components del joc
-├── services/         # Els serveis (autenticació, puntuacions, etc)
-├── utils/           # Funcions d'ajuda
-├── main.js          # L'inici 
-└── router.js        # Control de les pàgines
+├── components/       # Components del joc
+├── services/         # Serveis (autenticació, puntuacions, etc.)
+├── utils/            # Funcions auxiliars
+├── main.js           # Punt d'entrada de l'aplicació
+└── router.js         # Control de navegació entre pàgines
+```
+
+---
+
+## Usuari de prova
+
+Per a provar l'aplicació ràpidament:
+
+* **Correu:** `test@gmail.com`
+* **Contrasenya:** `123456`
 
 
-
-## Per registrar-se 
-test@gmail.com
-123456
