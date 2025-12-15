@@ -1,19 +1,32 @@
-import * as bootstrap from "bootstrap";
-import { router } from "./router.js";
-import { menuJoc } from "./components/header.js";
-import { peuPagina } from "./components/footer.js";
+import * as bootstrap from 'bootstrap';
+import { router } from './router.js';
+import './components/header.js';
+import './components/footer.js';
+import { initAuthState, isAuthenticated } from './services/authService.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-  const appDiv = document.querySelector("#app");
-  const header = document.querySelector("#header");
-  const footer = document.querySelector("#footer");
+document.addEventListener('DOMContentLoaded', () => {
+  const appDiv = document.querySelector('#app');
+  const headerDiv = document.querySelector('#header');
+  const footerDiv = document.querySelector('#footer');
 
-  header.innerHTML = menuJoc();
-  footer.innerHTML = peuPagina();
+  // Inicialitzar estat d'autenticació
+  initAuthState();
 
+  // Crear i afegir Web Components
+  const header = document.createElement('app-header');
+  headerDiv.appendChild(header);
   
-  router(window.location.hash ,appDiv);
-  window.addEventListener("hashchange", () => {
+  const footer = document.createElement('app-footer');
+  footerDiv.appendChild(footer);
+
+  // Si no està autenticat, redirigir a login
+  if (!isAuthenticated() && window.location.hash !== '#registre') {
+    window.location.hash = '#login';
+  }
+  
+  router(window.location.hash, appDiv);
+  
+  window.addEventListener('hashchange', () => {
     router(window.location.hash, appDiv);
   });
 });

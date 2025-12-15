@@ -6,13 +6,27 @@
   "scripts": {
     "test": "vitest --run --reporter verbose",
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "webpack --mode production",
+    "build:vite": "vite build",
+    "preview": "vite preview",
+    "webpack-dev": "webpack serve --mode development --open",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "html-webpack-plugin": "^5.6.5",
     "jsdom": "^27.1.0",
+    "rxjs": "^7.8.2",
+    "style-loader": "^4.0.0",
     "vite": "npm:rolldown-vite@7.1.14",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.1.14"

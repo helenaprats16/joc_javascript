@@ -7,27 +7,27 @@ const TEMPS_OCULTAR_INICIAL = 5000;
 const TEMPS_ERROR_PARELLA = 1000;      
 const TEMPS_VICTORIA = 1000;
 const arrayEmojis = [
-    "🍉",
-    "🥝",
-    "🍪",
-    "🍖",
-    "🥖",
-    "🥚",
-    "🍔",
-    "🍕",
-    "🍉",
-    "🥝",
-    "🍪",
-    "🍖",
-    "🥖",
-    "🥚",
-    "🍔",
-    "🍕",
-    "🫐",
-    "🫐",
-    "🥗",
-    "🥗",
-  ]; //cartes           
+  '🍉',
+  '🥝',
+  '🍪',
+  '🍖',
+  '🥖',
+  '🥚',
+  '🍔',
+  '🍕',
+  '🍉',
+  '🥝',
+  '🍪',
+  '🍖',
+  '🥖',
+  '🥚',
+  '🍔',
+  '🍕',
+  '🫐',
+  '🫐',
+  '🥗',
+  '🥗',
+]; //cartes           
   
 
 function renderContent() {  
@@ -41,25 +41,25 @@ function renderContent() {
 
 function crearTaulerJoc(){
 //array aleatori dels emojis
-  let emojis_aleatoris = arrayEmojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
+  const emojis_aleatoris = arrayEmojis.sort(() => (Math.random() > 0.5 ? 2 : -1));
 
 
-//creem contenidor principal del joc
-  const tauler = document.createElement("div");
-  tauler.classList.add("tauler");
-  tauler.classList.add("blocked"); // impedir clics fins que acabe el timeout
+  //creem contenidor principal del joc
+  const tauler = document.createElement('div');
+  tauler.classList.add('tauler');
+  tauler.classList.add('blocked'); // impedir clics fins que acabe el timeout
 
   //Creem les cartes
   for (let i = 0; i < TOTAL_CARTES; i++) {
-    const carta = document.createElement("div");
-    carta.className = "carta";
+    const carta = document.createElement('div');
+    carta.className = 'carta';
 
-    const caraFront = document.createElement("div");
-    caraFront.className = "front";
-    caraFront.textContent = "❓";
+    const caraFront = document.createElement('div');
+    caraFront.className = 'front';
+    caraFront.textContent = '❓';
 
-    const caraBack = document.createElement("div");
-    caraBack.className = "back";
+    const caraBack = document.createElement('div');
+    caraBack.className = 'back';
     caraBack.textContent = emojis_aleatoris[i];
 
     carta.appendChild(caraFront);
@@ -71,10 +71,10 @@ function crearTaulerJoc(){
 
   //creem BOTO REINICIAR PARTIDA 
 
-  const boto = document.createElement("button");
-  boto.className = "boto";
-  boto.textContent = "Reiniciar";
-  boto.addEventListener("click", () => window.location.reload());
+  const boto = document.createElement('button');
+  boto.className = 'boto';
+  boto.textContent = 'Reiniciar';
+  boto.addEventListener('click', () => window.location.reload());
 
   tauler.appendChild(boto);
 
@@ -87,17 +87,17 @@ function mostrarCartesInicials(tauler) {
   //Despres de 200 ms afegim la classe .girar a totes les cartes que estan dins del div taules (les mostrem)
   setTimeout(() => {
     tauler
-      .querySelectorAll(".carta")
-      .forEach((carta) => carta.classList.add("girar"));
+      .querySelectorAll('.carta')
+      .forEach((carta) => carta.classList.add('girar'));
   }, TEMPS_MOSTRAR_INICIAL);
 
   //despres de 5 segons llevem la classe .girar (les tornem a tancar)
 
   setTimeout(() => {
     tauler
-      .querySelectorAll(".carta")
-      .forEach((carta) => carta.classList.remove("girar"));
-    tauler.classList.remove("blocked"); //torna a permitir fer clics
+      .querySelectorAll('.carta')
+      .forEach((carta) => carta.classList.remove('girar'));
+    tauler.classList.remove('blocked'); //torna a permitir fer clics
   }, TEMPS_OCULTAR_INICIAL);
 }
 
@@ -126,18 +126,18 @@ function afegirLogicaJoc(tauler) {
 
   //3º Funcio per gestionar cada clic de cart
  
-  tauler.addEventListener("click", (e) => {
+  tauler.addEventListener('click', (e) => {
     
-    if (tauler.classList.contains("blocked") || bloquejat) return;
+    if (tauler.classList.contains('blocked') || bloquejat) return;
 
-    const carta = e.target.closest(".carta");
+    const carta = e.target.closest('.carta');
     if (!carta) return;
 
     // evitar clicar la mateixa carta o cartes ja encertades
-    if (carta.classList.contains("girar") || carta.classList.contains("matched")) return;
+    if (carta.classList.contains('girar') || carta.classList.contains('matched')) return;
 
     // Girem la carta clicada
-    carta.classList.add("girar");
+    carta.classList.add('girar');
 
     // Si no tenim carta1, la guardem 
     if (!carta1) {
@@ -149,32 +149,32 @@ function afegirLogicaJoc(tauler) {
     carta2 = carta;
     bloquejat = true;
 
-    const emoji1 = carta1.querySelector(".back").textContent;
-    const emoji2 = carta2.querySelector(".back").textContent;
+    const emoji1 = carta1.querySelector('.back').textContent;
+    const emoji2 = carta2.querySelector('.back').textContent;
 
     if (emoji1 === emoji2) {
       // Són iguals: les deixem girades i les marquem perquè no es puguin clicar
-      carta1.classList.add("matched");
-      carta2.classList.add("matched");
+      carta1.classList.add('matched');
+      carta2.classList.add('matched');
       carta1 = null;
       carta2 = null;
       bloquejat = false;
 
       contador++;
-      marcador.textContent=" Parelles encertades: "+contador;
+      marcador.textContent=' Parelles encertades: '+contador;
 
   
       if (contador === totalParelles) {
         setTimeout(() => {
-                alert("Enhorabona, has guanyat!");
+          alert('Enhorabona, has guanyat!');
 
         }, TEMPS_VICTORIA);
       }
     } else {
       // No són iguals: les tanquem després d'un segon
       setTimeout(() => {
-        carta1.classList.remove("girar");
-        carta2.classList.remove("girar");
+        carta1.classList.remove('girar');
+        carta2.classList.remove('girar');
         carta1 = null;
         carta2 = null;
         bloquejat = false;
@@ -186,8 +186,8 @@ function afegirLogicaJoc(tauler) {
 }
 
 function crearMarcador(){
-  let divParellesEncontrades = document.createElement("div");
-  divParellesEncontrades.textContent ="Parelles encertades: 0";
-  divParellesEncontrades.className = "contador";
+  const divParellesEncontrades = document.createElement('div');
+  divParellesEncontrades.textContent ='Parelles encertades: 0';
+  divParellesEncontrades.className = 'contador';
   return divParellesEncontrades;
 }
