@@ -3,6 +3,7 @@ import './components/registre-form.js';
 import './components/memory-game.js';
 import './components/user-profile.js';
 import './components/scores-list.js';
+import './components/com-jugar.js';
 import { isAuthenticated, isAdmin } from './services/authService.js';
 
 export { router };
@@ -13,11 +14,12 @@ const routes = new Map([
   ['#login', () => document.createElement('login-form')],
   ['#registre', () => document.createElement('registre-form')],
   ['#profile', () => document.createElement('user-profile')],
-  ['#scores', () => document.createElement('scores-list')]
+  ['#scores', () => document.createElement('scores-list')],
+  ['#comjugar', () => document.createElement('com-jugar')]
 ]);
 
 // Rutes protegides que requereixen autenticació
-const protectedRoutes = new Set(['#content', '#profile', '#scores']);
+const protectedRoutes = new Set(['#content', '#profile', '#scores', '#comjugar']);
 
 // Rutes només per admin (sistema de permisos)
 const adminRoutes = new Set([]);
@@ -34,8 +36,8 @@ function mountResult(container, result) {
 function router(route, container) {
   if (!container) return;
   
-  // Si la ruta està buida, establir per defecte al joc
-  const currentRoute = route || '#content';
+  // Ruta per defecte: si autenticat → com es juga, si no → login
+  const currentRoute = route || (isAuthenticated() ? '#comjugar' : '#login');
   
   // SISTEMA DE PERMISOS: Comprovar si la ruta requereix rol admin
   if (adminRoutes.has(currentRoute) && !isAdmin()) {
@@ -52,9 +54,9 @@ function router(route, container) {
     return;
   }
   
-  // Si està autenticat i intenta anar a login/registre, redirigir al joc
+  // Si està autenticat i intenta anar a login/registre, redirigir a "Com es juga"
   if (isAuthenticated() && (currentRoute === '#login' || currentRoute === '#registre')) {
-    window.location.hash = '#content';
+    window.location.hash = '#comjugar';
     return;
   }
   

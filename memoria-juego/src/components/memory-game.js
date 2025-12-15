@@ -153,7 +153,7 @@ class MemoryGame extends HTMLElement {
             }
             
             setTimeout(() => {
-              alert(`Enhorabona, has guanyat!\\n\\nTemps: ${totalTime}s\\nMoviments: ${this.moves}`);
+              alert(`Enhorabona, has guanyat :)!     Temps: ${totalTime}s    Moviments: ${this.moves}`);
               window.location.hash = '#scores';
             }, this.config.victoryTime);
           }

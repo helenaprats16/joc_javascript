@@ -62,6 +62,9 @@ class AppHeader extends HTMLElement {
     if (isAuthenticated) {
       this.leftMenu.innerHTML = `
         <li class="nav-item">
+          <a class="nav-link" href="#comjugar">Com Jugar</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="#content">Joc</a>
         </li>
         <li class="nav-item">

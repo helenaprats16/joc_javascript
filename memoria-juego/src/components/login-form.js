@@ -90,7 +90,7 @@ class LoginForm extends HTMLElement {
       
       try {
         await loginService(formData);
-        window.location.hash = '#content';
+        window.location.hash = '#comjugar';
       } catch (error) {
         alert(`Error: ${error.message}`);
         submitBtn.disabled = false;

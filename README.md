@@ -1,3 +1,4 @@
+
 # Joc de Memòria en JavaScript
 
 Projecte d'un **joc de memòria de trobar parelles** desenvolupat amb JavaScript, amb sistema d'usuaris, puntuacions i perfil personal. Les dades es guarden automàticament en finalitzar cada partida.
@@ -81,3 +82,22 @@ Per a provar l'aplicació ràpidament:
 * **Contrasenya:** `123456`
 
 
+*** End Patch
+- LocalStorage (per guardar les dades)
+- Bootstrap 5 (per tindrer millor aspecte)
+
+
+## Com està organitzat?
+
+src/
+├── components/       # Els components del joc
+├── services/         # Els serveis (autenticació, puntuacions, etc)
+├── utils/           # Funcions d'ajuda
+├── main.js          # L'inici 
+└── router.js        # Control de les pàgines
+
+
+
+## Per registrar-se 
+test@gmail.com
+123456
